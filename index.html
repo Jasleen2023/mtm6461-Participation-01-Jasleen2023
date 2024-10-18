@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+  
+  <title>Frontend Mentor | Product List with Cart</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      padding: 20px;
+      background-color: #f5e9e9;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .cart-icon {
+      position: relative;
+    }
+
+    .cart-count {
+      position: absolute;
+      top: -5px;
+      right: -10px;
+      background-color: rgb(185, 42, 42);
+      color: white;
+      border-radius: 50%;
+      padding: 2px 5px;
+      font-size: 12px;
+    }
+
+    .product-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .product {
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 10px;
+      text-align: center;
+    }
+
+    .product img {
+      width: 100px;
+      height: auto;
+      margin-bottom: 10px;
+    }
+
+    .cart {
+      padding: 20px;
+      border-top: 1px solid #ccc;
+    }
+
+    .cart ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    .cart button {
+      margin-top: 10px;
+    }
+
+    .attribution {
+      font-size: 11px;
+      text-align: center;
+    }
+
+    .attribution a {
+      color: hsl(228, 45%, 44%);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="cart-icon">
+      <span class="cart-count">0</span>
+      <button class="add-to-cart-button">Cart</button>
+      
+      <!-- Cart Popup -->
+      <div id="cart-popup" class="cart-popup hidden">
+        <h3> Cart</h3>
+        <ul id="cart-items"></ul>
+        <p>Total: $<span id="total-price">0</span></p>
+        <button id="checkout">Confirm Order</button>
+      </div>
+    </div>
+    
+  </header>
+  
+  <main>
+    <section class="product-list" id="product-list">
+      <div class="product">
+        <img src="./assets/images/image-waffle-desktop.jpg" alt="Waffle with Berries">
+        <h3>Waffle with Berries</h3>
+        <p>Price: $6.50</p>
+        <button onclick="addToCart('Waffle with Berries', 6.50)">Add to Cart</button>
+      </div>
+      <div class="product">
+        <img src="./assets/images/image-baklava-desktop.jpg" alt="Vanilla Bean Crème Brûlée">
+        <h3>Vanilla Bean</h3>
+        <p>Price: $7.00</p>
+        <button onclick="addToCart('Vanilla Bean Crème Brûlée', 7.00)">Add to Cart</button>
+      </div>
+      <div class="product">
+        <img src="./assets/images/image-macaron-desktop.jpg" alt="Macaron Mix of Five">
+        <h3>Macaron Mix of Five</h3>
+        <p>Price: $8.00</p>
+        <button onclick="addToCart('Macaron Mix of Five', 8.00)">Add to Cart</button>
+      </div>
+      <div class="product">
+        <img src="./assets/images/image-tiramisu-desktop.jpg" alt="Classic Tiramisu">
+        <h3>Classic Tiramisu</h3>
+        <p>Price: $5.50</p>
+        <button onclick="addToCart('Classic Tiramisu', 5.50)">Add to Cart</button>
+      </div>
+      <div class="product">
+        <img src="./assets/images/image-baklava-desktop.jpg" alt="Pistachio Baklava">
+        <h3>Pistachio Baklava</h3>
+        <p>Price: $4.00</p>
+        <button onclick="addToCart('Pistachio Baklava', 4.00)">Add to Cart</button>
+      </div>
+      <div class="product">
+        <img src="./assets/images/image-meringue-desktop.jpg" alt="Lemon Meringue Pie">
+        <h3>Lemon Meringue Pie</h3>
+        <p>Price: $5.00</p>
+        <button onclick="addToCart('Lemon Meringue Pie', 5.00)">Add to Cart</button>
+      </div>
+      <div class="product">
+        <img src="./assets/images/image-cake-desktop.jpg" alt="Red Velvet Cake">
+        <h3>Red Velvet Cake</h3>
+        <p>Price: $4.50</p>
+        <button onclick="addToCart('Red Velvet Cake', 4.50)">Add to Cart</button>
+      </div>
+      <div class="product">
+        <img src="./assets/images/image-brownie-desktop.jpg" alt="Salted Caramel Brownie">
+        <h3>Salted Caramel Brownie</h3>
+        <p>Price: $4.50</p>
+        <button onclick="addToCart('Salted Caramel Brownie', 4.50)">Add to Cart</button>
+      </div>
+      <div class="product">
+        <img src="./assets/images/image-panna-cotta-desktop.jpg" alt="Vanilla Panna Cotta">
+        <h3>Vanilla Panna Cotta</h3>
+        <p>Price: $6.50</p>
+        <button onclick="addToCart('Vanilla Panna Cotta', 6.50)">Add to Cart</button>
+      </div>
+    </section>
+
+    <section class="cart" id="cart">
+      <h2>Cart</h2>
+      <ul id="cart-items"></ul>
+      <p>Total: $<span id="total-price">0</span></p>
+      <button id="checkout">Checkout</button>
+    </section>
+  </main>
+
+  <div class="attribution">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge">Frontend Mentor</a>. 
+    Coded by <a href="#">Jasleen Kaur</a>.
+  </div>
+
+  <script src="./script.js"></script>
+</body>
+</html>
